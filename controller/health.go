@@ -1,24 +1,25 @@
 package controller
 
 import (
-	"bytes"
+	"encoding/json"
 	"fmt"
-	"log"
 	"net/http"
-	"os/exec"
+
+	"github.com/robertoduessmann/health-check/model"
 )
 
 func HealtCheck(w http.ResponseWriter, r *http.Request) {
-	respose := execCommand("free")
-	fmt.Fprintf(w, respose.String())
+
+	var health model.Health
+	health.Memory = MemoryCheck()
+
+	fmt.Fprintf(w, string(toJSON(health)))
 }
 
-func execCommand(command string) (out bytes.Buffer) {
-	cmd := exec.Command(command)
-	cmd.Stdout = &out
-	err := cmd.Run()
+func toJSON(health model.Health) []byte {
+	respose, err := json.Marshal(health)
 	if err != nil {
-		log.Fatal(err)
+		fmt.Println(err)
 	}
-	return
+	return respose
 }
