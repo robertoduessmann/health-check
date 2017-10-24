@@ -20,7 +20,7 @@ type DeviceDescriptor struct {
 	Children   []DeviceDescriptor `json:"children"`
 }
 
-func HardDiskCheck() (hardDisks []model.HardDisk) {
+func DisksCheck() (disks []model.Disk) {
 	lsblkCommand := ExecCommand("lsblk --json")
 	lsblkResult := lsblkCommand.String()
 
@@ -35,13 +35,13 @@ func HardDiskCheck() (hardDisks []model.HardDisk) {
 	for _, diskName := range diskNames {
 		dfCommand := ExecCommand("df -B1 /dev/" + diskName)
 		dfResult := dfCommand.String()
-		diskInfo, err := parseDf(dfResult)
+		disk, err := parseDf(dfResult)
 		if err != nil {
 			log.Printf("df parse error for /dev/%s: %q", diskName, err)
 			continue
 		}
-		diskInfo.Name = diskName
-		hardDisks = append(hardDisks, diskInfo)
+		disk.Name = diskName
+		disks = append(disks, disk)
 	}
 
 	return
@@ -70,7 +70,7 @@ func parseLsblk(cmdOutput string) (devices Devices, err error) {
 	return
 }
 
-func parseDf(cmdOutput string) (disk model.HardDisk, err error) {
+func parseDf(cmdOutput string) (disk model.Disk, err error) {
 	lines := strings.Split(cmdOutput, "\n")
 	if len(lines) != 3 { // 3 is empty newline at the end
 		return disk, errors.New("Invalid df output")

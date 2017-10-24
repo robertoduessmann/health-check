@@ -12,7 +12,7 @@ func HealtCheck(w http.ResponseWriter, r *http.Request) {
 
 	var health model.Health
 	health.Memory = MemoryCheck()
-	health.HardDisks = HardDiskCheck()
+	health.Disks = DisksCheck()
 
 	fmt.Fprintf(w, string(toJSON(health)))
 }
