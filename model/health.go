@@ -2,6 +2,6 @@ package model
 
 type Health struct {
 	Memory    Memory    `json:"memory"`
-	HardDisk  HardDisk  `json:"hard_disk"`
+	Disks     []Disk    `json:"disks"`
 	Processor Processor `json:"processor"`
 }
