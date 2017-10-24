@@ -13,3 +13,13 @@ Download [health-check](https://github.com/robertoduessmann/health-check/blob/ma
 ## Usage
 
 Just open http://localhost:3000/status in your server :)
+
+## Installation
+
+If you want to hack on health-check
+
+`go get github.com/robertoduessmann/health-check`
+
+To make sure all the dependencies are installed
+
+`dep ensure`
