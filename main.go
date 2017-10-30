@@ -1,9 +1,10 @@
 package main
 
 import (
-	"health-check/config"
 	"log"
 	"net/http"
+
+	"github.com/robertoduessmann/health-check/config"
 
 	"github.com/robertoduessmann/health-check/controller"
 
