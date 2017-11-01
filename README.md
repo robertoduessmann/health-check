@@ -4,8 +4,12 @@
 
 > Check your server health easily
 
+## Build
+```sh
+go build
+```
 ## Run
-Download [health-check](https://github.com/robertoduessmann/health-check/blob/master/health-check) and run:
+Build (above) or download [health-check](https://github.com/robertoduessmann/health-check/blob/master/health-check) and run:
 ```sh
 ./health-check
 ```
