@@ -33,9 +33,12 @@ func DisksCheck() (disks []model.Disk) {
 	diskNames := getDiskNames(devices)
 
 	for _, diskName := range diskNames {
-		dfCommand := ExecCommand("df -B1 /dev/" + diskName)
+		dfCommand := ExecCommand("df -k /dev/" + diskName)
 		dfResult := dfCommand.String()
 		disk, err := parseDf(dfResult)
+		disk.Total = disk.Total + " Kb"
+		disk.Used = disk.Used + " Kb"
+		disk.Free = disk.Free + " Kb"
 		if err != nil {
 			log.Printf("df parse error for /dev/%s: %q", diskName, err)
 			continue
