@@ -33,7 +33,7 @@ func DisksCheck() (disks []model.Disk) {
 	diskNames := getDiskNames(devices)
 
 	for _, diskName := range diskNames {
-		dfCommand := ExecCommand("df -B1 /dev/" + diskName)
+		dfCommand := ExecCommand("df -k /dev/" + diskName)
 		dfResult := dfCommand.String()
 		disk, err := parseDf(dfResult)
 		disk.Total = disk.Total + " Kb"
