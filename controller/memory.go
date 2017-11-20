@@ -10,7 +10,7 @@ func MemoryCheck() (memory model.Memory) {
 	memoryCommand := ExecCommand("free")
 	memoryResult := memoryCommand.String()
 
-	total, _ := strconv.ParseInt(memoryResult[92:99], 0, 64)
+	total, _ := strconv.ParseInt(memoryResult[91:99], 0, 64)
 	used, _ := strconv.ParseInt(memoryResult[104:111], 0, 64)
 	free := total - used
 
