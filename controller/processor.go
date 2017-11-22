@@ -15,6 +15,6 @@ func ProcessorCheck() *model.Processor {
 		return nil
 	}
 	total := strconv.FormatFloat(cpuUsage[0], 'g', 3, 64)
-	proc := model.Processor{Total: total}
+	proc := model.Processor{Total: total + " %%"}
 	return &proc
 }
